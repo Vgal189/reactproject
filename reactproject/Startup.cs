@@ -2,10 +2,6 @@
 using Autofac.Extensions.DependencyInjection;
 using MediatR;
 using MongoDB.Driver;
-using reactproject.Commands.Person;
-using reactproject.Commands.Product;
-using reactproject.Handler.Person;
-using reactproject.Handler.Product;
 using reactproject.Infrastructure.Configuration;
 using reactproject.Infrastructure.Modules;
 
@@ -18,7 +14,7 @@ namespace reactproject
             Configuration = configuration;        
         }
         public IConfiguration Configuration { get; }
-        DbConfiguration configurationDb = new DbConfiguration();
+        readonly DbConfiguration configurationDb = new DbConfiguration();
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -41,6 +37,10 @@ namespace reactproject
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
             app.UseSwagger()
                 .UseSwaggerUI();
             app.UseHttpsRedirection();
@@ -50,8 +50,6 @@ namespace reactproject
             {
                 endpoints.MapControllers();
             });
-
         }
-
     }
 }
