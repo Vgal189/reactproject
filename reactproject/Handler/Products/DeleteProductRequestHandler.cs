@@ -1,16 +1,16 @@
 ﻿using MediatR;
-using reactproject.AggregatesModel.Product;
-using reactproject.Commands.Product;
+using reactproject.AggregatesModel.Products;
+using reactproject.Commands.Products;
 using reactproject.Repositories;
 
-namespace reactproject.Handler.Product
+namespace reactproject.Handler.Products
 {
     public class DeleteProductRequestHandler : IRequestHandler<DeleteProductRequest, bool>
     {
-        private readonly Repository<ProductModel> _repository;
+        private readonly Repository<Product> _repository;
         private const string COLLECTION_NAME = "product";
 
-        public DeleteProductRequestHandler(Repository<ProductModel> repository)
+        public DeleteProductRequestHandler(Repository<Product> repository)
         {
             _repository = repository;
         }

@@ -1,25 +1,23 @@
 ﻿using MediatR;
-using MongoDB.Driver;
-using reactproject.AggregatesModel.Product;
-using reactproject.Commands.Person;
-using reactproject.Commands.Product;
+using reactproject.AggregatesModel.Products;
+using reactproject.Commands.Products;
 using reactproject.Repositories;
 
-namespace reactproject.Handler.Product
+namespace reactproject.Handler.Products
 {
     public class AddProductHandler : IRequestHandler<AddProductRequest, AddProductResponse>
     {
-        private readonly Repository<ProductModel> _repository;
+        private readonly Repository<Product> _repository;
         private const string COLLECTION_NAME = "product";
 
-        public AddProductHandler(Repository<ProductModel> repository)
+        public AddProductHandler(Repository<Product> repository)
         {
             _repository = repository;
         }
 
         public async Task<AddProductResponse> Handle(AddProductRequest request, CancellationToken cancellationToken)
         {
-            var document = new ProductModel(request.Name, request.Type, request.Price);
+            var document = new Product(request.Name, request.Price, request.Description, request.Images);
 
             await _repository.Add(document, COLLECTION_NAME);
 

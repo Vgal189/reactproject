@@ -1,23 +1,21 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using MongoDB.Driver;
-using reactproject.AggregatesModel.Person;
-using reactproject.Commands.Person;
+using reactproject.AggregatesModel.CostumerInfo;
+using reactproject.Commands.Costumer;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PersonController : Controller
+    public class CostumerController : Controller
     {
-        private readonly ILogger<PersonController> _logger;
-        private readonly Repository<PersonModel> _repository;
+        private readonly ILogger<CostumerController> _logger;
+        private readonly Repository<CustomerInfo> _repository;
         private readonly IMediator _mediator;
-        private const string COLLECTION_NAME = "person";
+        private const string COLLECTION_NAME = "costumer";
 
-        public PersonController(ILogger<PersonController> logger, Repository<PersonModel> repository, IMediator mediator)
+        public CostumerController(ILogger<CostumerController> logger, Repository<CustomerInfo> repository, IMediator mediator)
         {
 
             _logger = logger;
@@ -26,15 +24,19 @@ namespace reactproject.Controllers
         }
 
         [HttpGet]
-        [Route("/api/person")]
+        [Route("/api/costumer")]
         public async Task<IActionResult> Get()
         {
             var documents = await _repository.GetAllAsync(COLLECTION_NAME);
+            
+            if (documents == null || documents.Count == 0)
+                return NoContent();
+
             return Ok(documents);
         }
 
         [HttpGet]
-        [Route("/api/person/{id}")]
+        [Route("/api/costumer/{id}")]
         public async Task<IActionResult> GetById([FromRoute] string id)
         {
             var documents = await _repository.GetByIdAsync(COLLECTION_NAME, id);
@@ -43,8 +45,8 @@ namespace reactproject.Controllers
         }
 
         [HttpPost]
-        [Route("/api/person")]
-        public async Task<IActionResult> Create([FromBody]AddPersonRequest request)
+        [Route("/api/costumer")]
+        public async Task<IActionResult> Create([FromBody]AddCustomerInfoRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -57,7 +59,7 @@ namespace reactproject.Controllers
         }
 
         [HttpDelete]
-        [Route("/api/person/{id}")]
+        [Route("/api/costumer/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (!ModelState.IsValid)
@@ -65,7 +67,7 @@ namespace reactproject.Controllers
                 return BadRequest(ModelState);
             }
 
-            var response = await _mediator.Send(new DeletePersonRequest(id));
+            var response = await _mediator.Send(new DeleteCustomerInfoRequest(id));
 
             return Ok(response);
         }

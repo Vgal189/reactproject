@@ -24,7 +24,7 @@ namespace reactproject
             services.AddSingleton<MongoClient>();
             services.AddSwaggerGen();
             services.AddEndpointsApiExplorer();
-            services.AddSingleton<string>(_ => configurationDb.GetMongoDbConnectionString());
+            services.AddSingleton(_ => configurationDb.GetMongoDbConnectionString());
 
             var container = new ContainerBuilder();
             container.Populate(services);

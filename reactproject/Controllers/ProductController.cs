@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using reactproject.AggregatesModel.Product;
-using reactproject.Commands.Person;
-using reactproject.Commands.Product;
+using reactproject.AggregatesModel.Products;
+using reactproject.Commands.Products;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers
@@ -12,12 +10,12 @@ namespace reactproject.Controllers
     [Route("[controller]")]
     public class ProductController : Controller
     {
-        private readonly ILogger<PersonController> _logger;
-        private readonly Repository<ProductModel> _repository;
+        private readonly ILogger<CostumerController> _logger;
+        private readonly Repository<Product> _repository;
         private readonly IMediator _mediator;
         private const string COLLECTION_NAME = "product";
 
-        public ProductController(ILogger<PersonController> logger, Repository<ProductModel> repository, IMediator mediator)
+        public ProductController(ILogger<CostumerController> logger, Repository<Product> repository, IMediator mediator)
         {
             _logger = logger;
             _repository = repository;
@@ -29,6 +27,10 @@ namespace reactproject.Controllers
         public async Task<IActionResult> Get()
         {
             var documents = await _repository.GetAllAsync(COLLECTION_NAME);
+            
+            if (documents == null || documents.Count == 0)
+                return NoContent();
+
             return Ok(documents);
         }
 
@@ -37,6 +39,7 @@ namespace reactproject.Controllers
         public async Task<IActionResult> GetById([FromRoute] string id)
         {
             var documents = await _repository.GetByIdAsync(COLLECTION_NAME, id);
+
             return Ok(documents);
         }
 

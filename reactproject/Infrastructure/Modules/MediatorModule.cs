@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using MediatR;
-using reactproject.Commands.Person;
-using reactproject.Commands.Product;
-using reactproject.Handler.Person;
-using reactproject.Handler.Product;
+using reactproject.Commands.Costumer;
+using reactproject.Commands.Products;
+using reactproject.Handler.Costumer;
+using reactproject.Handler.Products;
 using System.Reflection;
 
 namespace reactproject.Infrastructure.Modules
@@ -13,17 +13,17 @@ namespace reactproject.Infrastructure.Modules
         protected override void Load(ContainerBuilder builder)
         {
             // requests
-            builder.RegisterAssemblyTypes(typeof(AddPersonRequest).GetTypeInfo().Assembly);
-            builder.RegisterAssemblyTypes(typeof(AddPersonRequest).GetTypeInfo().Assembly);
-            builder.RegisterAssemblyTypes(typeof(DeletePersonRequest).GetTypeInfo().Assembly);
+            builder.RegisterAssemblyTypes(typeof(AddCustomerInfoRequest).GetTypeInfo().Assembly);
+            builder.RegisterAssemblyTypes(typeof(AddCustomerInfoRequest).GetTypeInfo().Assembly);
+            builder.RegisterAssemblyTypes(typeof(DeleteCustomerInfoRequest).GetTypeInfo().Assembly);
             builder.RegisterAssemblyTypes(typeof(DeleteProductRequest).GetTypeInfo().Assembly);
 
             // handlers
-            builder.RegisterAssemblyTypes(typeof(DeletePersonRequestHandler).GetTypeInfo().Assembly)
+            builder.RegisterAssemblyTypes(typeof(DeleteCostumerInfoHandler).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));
             builder.RegisterAssemblyTypes(typeof(DeleteProductRequestHandler).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(AddPersonHandler).GetTypeInfo().Assembly)
+            builder.RegisterAssemblyTypes(typeof(AddCostumerInfoHandler).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));
             builder.RegisterAssemblyTypes(typeof(AddProductHandler).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));

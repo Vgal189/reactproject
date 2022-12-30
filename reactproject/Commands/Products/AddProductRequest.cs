@@ -1,19 +1,20 @@
 ﻿using MediatR;
-using reactproject.AggregatesModel.Product;
 
-namespace reactproject.Commands.Product
+namespace reactproject.Commands.Products
 {
     public class AddProductRequest : IRequest<AddProductResponse>
     {
-        public AddProductRequest(string name, ProductType type, int price)
+        public AddProductRequest(string name, decimal price, string? description, List<string>? images)
         {
             Name = name;
-            Type = type;
             Price = price;
+            Description = description;
+            Images = images;
         }
         public string Name { get; set; }
-        public ProductType Type { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
+        public string? Description { get; set; }
+        public List<string>? Images { get; set; }
     }
 
     public class AddProductResponse

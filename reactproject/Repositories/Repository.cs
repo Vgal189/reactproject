@@ -1,9 +1,6 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.StaticFiles;
-using MongoDB.Driver;
-using reactproject.AggregatesModel.Product;
+﻿using MongoDB.Driver;
 using reactproject.Models;
-using System.Threading;
+
 
 namespace reactproject.Repositories
 {

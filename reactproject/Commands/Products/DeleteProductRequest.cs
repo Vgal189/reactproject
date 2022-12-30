@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace reactproject.Commands.Product
+namespace reactproject.Commands.Products
 {
     public class DeleteProductRequest : IRequest<bool>
     {

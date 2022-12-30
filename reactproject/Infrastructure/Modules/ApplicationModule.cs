@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using reactproject.AggregatesModel.Person;
-using reactproject.AggregatesModel.Product;
+using reactproject.AggregatesModel.CostumerInfo;
+using reactproject.AggregatesModel.Products;
 using reactproject.Repositories;
 
 
@@ -12,9 +12,9 @@ namespace reactproject.Infrastructure.Modules
         {
             builder.RegisterGeneric(typeof(Repository<>))
                 .InstancePerLifetimeScope();
-            builder.RegisterType<Repository<PersonModel>>()
+            builder.RegisterType<Repository<CustomerInfo>>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<Repository<ProductModel>>()
+            builder.RegisterType<Repository<Product>>()
                 .InstancePerLifetimeScope();
         }
     }
