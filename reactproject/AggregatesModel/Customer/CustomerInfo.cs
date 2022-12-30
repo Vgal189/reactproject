@@ -1,6 +1,5 @@
 ﻿using reactproject.AggregatesModel.Customer;
 using reactproject.Models;
-using System.Net;
 
 namespace reactproject.AggregatesModel.CostumerInfo
 {

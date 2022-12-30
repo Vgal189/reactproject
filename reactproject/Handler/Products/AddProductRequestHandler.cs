@@ -5,12 +5,12 @@ using reactproject.Repositories;
 
 namespace reactproject.Handler.Products
 {
-    public class AddProductHandler : IRequestHandler<AddProductRequest, AddProductResponse>
+    public class AddProductRequestHandler : IRequestHandler<AddProductRequest, AddProductResponse>
     {
         private readonly Repository<Product> _repository;
         private const string COLLECTION_NAME = "product";
 
-        public AddProductHandler(Repository<Product> repository)
+        public AddProductRequestHandler(Repository<Product> repository)
         {
             _repository = repository;
         }

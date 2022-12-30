@@ -4,14 +4,15 @@ namespace reactproject.AggregatesModel.Orders
 {
     public class OrderItem
     {
-        public OrderItem(Product product, int quantity, decimal price)
+        public OrderItem() { }
+        public OrderItem(string productId, int quantity, decimal price)
         {
-            Product = product;
+            ProductId = productId;
             Quantity = quantity;
             Price = price;
         }
 
-        public Product Product { get; set; }
+        public string ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace reactproject.Commands.Costumer
+namespace reactproject.Commands.Customer
 {
     public class DeleteCustomerInfoRequest : IRequest<bool>
     {

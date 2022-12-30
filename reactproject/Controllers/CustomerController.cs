@@ -1,21 +1,21 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using reactproject.AggregatesModel.CostumerInfo;
-using reactproject.Commands.Costumer;
+using reactproject.Commands.Customer;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CostumerController : Controller
+    public class CustomerController : Controller
     {
-        private readonly ILogger<CostumerController> _logger;
+        private readonly ILogger<CustomerController> _logger;
         private readonly Repository<CustomerInfo> _repository;
         private readonly IMediator _mediator;
-        private const string COLLECTION_NAME = "costumer";
+        private const string COLLECTION_NAME = "customer";
 
-        public CostumerController(ILogger<CostumerController> logger, Repository<CustomerInfo> repository, IMediator mediator)
+        public CustomerController(ILogger<CustomerController> logger, Repository<CustomerInfo> repository, IMediator mediator)
         {
 
             _logger = logger;
@@ -24,7 +24,7 @@ namespace reactproject.Controllers
         }
 
         [HttpGet]
-        [Route("/api/costumer")]
+        [Route("/api/customer")]
         public async Task<IActionResult> Get()
         {
             var documents = await _repository.GetAllAsync(COLLECTION_NAME);
@@ -36,7 +36,7 @@ namespace reactproject.Controllers
         }
 
         [HttpGet]
-        [Route("/api/costumer/{id}")]
+        [Route("/api/customer/{id}")]
         public async Task<IActionResult> GetById([FromRoute] string id)
         {
             var documents = await _repository.GetByIdAsync(COLLECTION_NAME, id);
@@ -45,8 +45,8 @@ namespace reactproject.Controllers
         }
 
         [HttpPost]
-        [Route("/api/costumer")]
-        public async Task<IActionResult> Create([FromBody]AddCustomerInfoRequest request)
+        [Route("/api/customer")]
+        public async Task<IActionResult> Create([FromBody] AddCustomerInfoRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace reactproject.Controllers
         }
 
         [HttpDelete]
-        [Route("/api/costumer/{id}")]
+        [Route("/api/customer/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (!ModelState.IsValid)

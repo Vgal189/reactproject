@@ -1,33 +1,34 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.AggregatesModel.Products;
-using reactproject.Commands.Products;
+using reactproject.AggregatesModel.Order;
+using reactproject.Commands.Orders;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductController : Controller
+    public class OrderController : Controller
     {
-        private readonly ILogger<CustomerController> _logger;
-        private readonly Repository<Product> _repository;
+        private readonly ILogger<OrderController> _logger;
+        private readonly Repository<Order> _repository;
         private readonly IMediator _mediator;
-        private const string COLLECTION_NAME = "product";
+        private const string COLLECTION_NAME = "order";
 
-        public ProductController(ILogger<CustomerController> logger, Repository<Product> repository, IMediator mediator)
+        public OrderController(ILogger<OrderController> logger, Repository<Order> repository, IMediator mediator)
         {
+
             _logger = logger;
             _repository = repository;
             _mediator = mediator;
         }
 
         [HttpGet]
-        [Route("/api/product")]
+        [Route("/api/order")]
         public async Task<IActionResult> Get()
         {
             var documents = await _repository.GetAllAsync(COLLECTION_NAME);
-            
+
             if (documents == null || documents.Count == 0)
                 return NoContent();
 
@@ -35,7 +36,7 @@ namespace reactproject.Controllers
         }
 
         [HttpGet]
-        [Route("/api/product/{id}")]
+        [Route("/api/order/{id}")]
         public async Task<IActionResult> GetById([FromRoute] string id)
         {
             var documents = await _repository.GetByIdAsync(COLLECTION_NAME, id);
@@ -43,18 +44,9 @@ namespace reactproject.Controllers
             return Ok(documents);
         }
 
-        [HttpPut]
-        [Route("/api/product/{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] UpdateProductRequest request)
-        {
-            request.Id = id;
-            var response = await _mediator.Send(request);
-            return response ? Ok("Success") : BadRequest();
-        }
-
         [HttpPost]
-        [Route("/api/product")]
-        public async Task<IActionResult> Create([FromBody] AddProductRequest request)
+        [Route("/api/order")]
+        public async Task<IActionResult> Create([FromBody] AddOrderRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +59,7 @@ namespace reactproject.Controllers
         }
 
         [HttpDelete]
-        [Route("/api/product/{id}")]
+        [Route("/api/order/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (!ModelState.IsValid)
@@ -75,9 +67,9 @@ namespace reactproject.Controllers
                 return BadRequest(ModelState);
             }
 
-            var response = await _mediator.Send(new DeleteProductRequest(id));
+            var response = await _mediator.Send(new DeleteOrderRequest(id));
 
-            return response ? Ok("Deleted") : BadRequest();
+            return Ok(response);
         }
     }
 }

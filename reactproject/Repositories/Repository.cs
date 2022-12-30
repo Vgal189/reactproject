@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using reactproject.Models;
+using SharpCompress.Common;
 
 
 namespace reactproject.Repositories
@@ -34,12 +35,19 @@ namespace reactproject.Repositories
             await collection.InsertOneAsync(document);
             return collection;
         }
-        public async Task<bool> Delete(string collectionName, CancellationToken cancellationToken,  string requestId)
+        public async Task<bool> Delete(string collectionName, CancellationToken cancellationToken,  string id)
         {
             var collection = _database.GetCollection<T>(collectionName);
-            var filter = Builders<T>.Filter.Eq(p => p.Id, requestId);
+            var filter = Builders<T>.Filter.Eq(p => p.Id, id);
             var result = await collection.DeleteOneAsync(filter, cancellationToken);
             return result.DeletedCount > 0;
         }
+        public async Task UpdateAsync(T document, string collectionName, string id)
+        {
+            var collection = _database.GetCollection<T>(collectionName);
+            var filter = Builders<T>.Filter.Eq(e => e.Id, id);
+            await collection.ReplaceOneAsync(filter, document);
+        }
+
     }
 }

@@ -1,17 +1,19 @@
-﻿using reactproject.Models;
+﻿using MediatR;
+using Newtonsoft.Json;
 
-namespace reactproject.AggregatesModel.Products
+namespace reactproject.Commands.Products
 {
-    public class Product : Entity
+    public class UpdateProductRequest : IRequest<bool>
     {
-        public Product() { }
-        public Product(string name, decimal price, string? description, List<string>? images)
+        public UpdateProductRequest(string id, string name, decimal price, string? description, List<string>? images)
         {
+            Id = id;
             Name = name;
             Price = price;
             Description = description;
             Images = images;
         }
+        public string Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string? Description { get; set; }

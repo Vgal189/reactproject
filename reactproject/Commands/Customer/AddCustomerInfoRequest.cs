@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using reactproject.AggregatesModel.Customer;
 
-namespace reactproject.Commands.Costumer
+namespace reactproject.Commands.Customer
 {
-    public class AddCustomerInfoRequest : IRequest<AddCostumerInfoResponse>
+    public class AddCustomerInfoRequest : IRequest<AddCustomerInfoResponse>
     {
         public AddCustomerInfoRequest(string firstName, string lastName, string email, Address shippingAddress, Address billingAddress)
         {
@@ -20,9 +20,9 @@ namespace reactproject.Commands.Costumer
         public Address BillingAddress { get; set; }
     }
 
-    public class AddCostumerInfoResponse
+    public class AddCustomerInfoResponse
     {
-        public AddCostumerInfoResponse(string id)
+        public AddCustomerInfoResponse(string id)
         {
             Id = id;
         }

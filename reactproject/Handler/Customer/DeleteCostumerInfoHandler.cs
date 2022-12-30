@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using reactproject.AggregatesModel.CostumerInfo;
-using reactproject.Commands.Costumer;
+using reactproject.Commands.Customer;
 using reactproject.Repositories;
 
-namespace reactproject.Handler.Costumer
+namespace reactproject.Handler.Customer
 {
-    public class DeleteCostumerInfoHandler : IRequestHandler<DeleteCustomerInfoRequest, bool>
+    public class DeleteCustomerInfoHandler : IRequestHandler<DeleteCustomerInfoRequest, bool>
     {
         private readonly Repository<CustomerInfo> _repository;
-        private const string COLLECTION_NAME = "costumer";
+        private const string COLLECTION_NAME = "customer";
 
-        public DeleteCostumerInfoHandler(Repository<CustomerInfo> repository)
+        public DeleteCustomerInfoHandler(Repository<CustomerInfo> repository)
         {
             _repository= repository;
         }
