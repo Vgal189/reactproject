@@ -1,4 +1,4 @@
-﻿using reactproject.AggregatesModel.Products;
+﻿using reactproject.AggregatesModel.Product;
 
 namespace reactproject.AggregatesModel.Orders
 {

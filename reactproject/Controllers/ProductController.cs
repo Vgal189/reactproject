@@ -1,12 +1,14 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.AggregatesModel.Products;
+using reactproject.AggregatesModel.Product;
 using reactproject.Commands.Products;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "Admin")]
     [Route("[controller]")]
     public class ProductController : Controller
     {

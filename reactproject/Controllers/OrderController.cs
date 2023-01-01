@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.AggregatesModel.Order;
 using reactproject.Commands.Orders;
 using reactproject.Repositories;
 
@@ -11,23 +10,23 @@ namespace reactproject.Controllers
     public class OrderController : Controller
     {
         private readonly ILogger<OrderController> _logger;
-        private readonly Repository<Order> _repository;
+        private readonly OrderRepository _repository;
         private readonly IMediator _mediator;
         private const string COLLECTION_NAME = "order";
 
-        public OrderController(ILogger<OrderController> logger, Repository<Order> repository, IMediator mediator)
+        public OrderController(ILogger<OrderController> logger, IMediator mediator, OrderRepository orderRepository)
         {
 
             _logger = logger;
-            _repository = repository;
             _mediator = mediator;
+            _repository = orderRepository;
         }
 
         [HttpGet]
         [Route("/api/order")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetOrders()
         {
-            var documents = await _repository.GetAllAsync(COLLECTION_NAME);
+            var documents = await _repository.GetAllOrdersAsync();
 
             if (documents == null || documents.Count == 0)
                 return NoContent();

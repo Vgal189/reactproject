@@ -7,8 +7,8 @@ namespace reactproject.Repositories
 {
     public class Repository<T> where T : Entity
     {
-        private readonly MongoClient _client;
-        private readonly IMongoDatabase _database;
+        protected readonly MongoClient _client;
+        protected readonly IMongoDatabase _database;
 
         public Repository(string connectionString)
         {
@@ -27,6 +27,12 @@ namespace reactproject.Repositories
         {
             var collection = _database.GetCollection<T>(collectionName);
             return await collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<T>> GetFilteredCollection<T>(string collectionName, FilterDefinition<T> filter)
+        {
+            var collection = _database.GetCollection<T>(collectionName);
+            return await collection.Find(filter).ToListAsync();
         }
 
         public async Task<IMongoCollection<T>> Add(T document, string collectionName)

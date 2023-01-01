@@ -2,7 +2,7 @@
 using reactproject.AggregatesModel.CostumerInfo;
 using reactproject.AggregatesModel.Order;
 using reactproject.AggregatesModel.Orders;
-using reactproject.AggregatesModel.Products;
+using reactproject.AggregatesModel.Product;
 using reactproject.Commands.Orders;
 using reactproject.Repositories;
 

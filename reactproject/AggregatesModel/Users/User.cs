@@ -1,4 +1,5 @@
 ﻿using reactproject.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace reactproject.AggregatesModel.Users
 {
@@ -11,8 +12,12 @@ namespace reactproject.AggregatesModel.Users
             Name = name;
         }
 
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string PasswordHash { get; set; }
+        [Required]
         public string Name { get; set; }
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using reactproject.AggregatesModel.Products;
+using reactproject.AggregatesModel.Product;
 using reactproject.Commands.Products;
 using reactproject.Repositories;
 

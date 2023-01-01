@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using AspNetCore.Identity.MongoDbCore.Models;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using MediatR;
 using MongoDB.Driver;
@@ -18,6 +19,7 @@ namespace reactproject
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services
                 .AddControllers();
             services.AddMediatR(typeof(Program));
@@ -25,6 +27,11 @@ namespace reactproject
             services.AddSwaggerGen();
             services.AddEndpointsApiExplorer();
             services.AddSingleton(_ => configurationDb.GetMongoDbConnectionString());
+            services.AddAuthentication();
+            services.AddAuthorization();
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>
+                (configurationDb.GetMongoDbConnectionString(), "simple_db");
 
             var container = new ContainerBuilder();
             container.Populate(services);
@@ -45,6 +52,7 @@ namespace reactproject
                 .UseSwaggerUI();
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

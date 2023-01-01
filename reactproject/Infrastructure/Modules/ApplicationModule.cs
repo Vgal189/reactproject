@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using reactproject.AggregatesModel.CostumerInfo;
 using reactproject.AggregatesModel.Order;
-using reactproject.AggregatesModel.Products;
+using reactproject.AggregatesModel.Product;
 using reactproject.Repositories;
 
 
@@ -19,6 +19,9 @@ namespace reactproject.Infrastructure.Modules
                 .InstancePerLifetimeScope();
             builder.RegisterType<Repository<Order>>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<OrderRepository>()
+                .InstancePerLifetimeScope();
+
         }
     }
 }
