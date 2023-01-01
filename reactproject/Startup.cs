@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using MediatR;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using reactproject.Infrastructure.Configuration;
 using reactproject.Infrastructure.Modules;
@@ -30,7 +31,7 @@ namespace reactproject
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>
+                .AddMongoDbStores<ApplicationUser, ApplicationRole, ObjectId>
                 (configurationDb.GetMongoDbConnectionString(), "simple_db");
 
             var container = new ContainerBuilder();
