@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using reactproject.Infrastructure.Configuration;
@@ -29,7 +30,7 @@ namespace reactproject
             services.AddEndpointsApiExplorer();
             services.AddSingleton(_ => configurationDb.GetMongoDbConnectionString());
             services.AddAuthentication();
-            services.AddAuthorization();
+            services.AddAuthorization(ConfigureAuthorizationPolicies);
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddMongoDbStores<ApplicationUser, ApplicationRole, ObjectId>
                 (configurationDb.GetMongoDbConnectionString(), "simple_db");
@@ -59,6 +60,17 @@ namespace reactproject
             {
                 endpoints.MapControllers();
             });
+        }
+        private void ConfigureAuthorizationPolicies(AuthorizationOptions options)
+        {
+            options.AddPolicy("CreatePolicy", policy =>
+                policy.RequireRole("Admin", "Collaborator"));
+            options.AddPolicy("ReadPolicy", policy =>
+                policy.RequireRole("Admin", "Manager", "Collaborator", "Reader"));
+            options.AddPolicy("UpdatePolicy", policy =>
+                policy.RequireRole("Admin", "Collaborator"));
+            options.AddPolicy("DeletePolicy", policy =>
+                policy.RequireRole("Admin", "Collaborator"));
         }
     }
 }

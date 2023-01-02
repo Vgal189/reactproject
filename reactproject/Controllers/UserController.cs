@@ -1,26 +1,24 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.AggregatesModel.Users;
 using reactproject.Commands.Users;
 using reactproject.Infrastructure.Configuration;
-using reactproject.Repositories;
 using System.ComponentModel.DataAnnotations;
 
 namespace reactproject.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "Admin, Manager")]
     [Route("[controller]")]
     public class UserController : Controller
     {
-        private readonly Repository<User> _repository;
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<ApplicationRole> _roleManager;
 
-        public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, Repository<User> repository) 
+        public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager) 
         {
             this._userManager = userManager;
             this._roleManager = roleManager;
-            this._repository = repository;
         }
 
         [HttpPost]

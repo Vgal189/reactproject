@@ -8,7 +8,7 @@ using reactproject.Repositories;
 namespace reactproject.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize()]
     [Route("[controller]")]
     public class ProductController : Controller
     {
@@ -25,6 +25,7 @@ namespace reactproject.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "ReadPolicy")]
         [Route("/api/product")]
         public async Task<IActionResult> Get()
         {
