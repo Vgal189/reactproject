@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using reactproject.Commands.Users;
-using reactproject.Infrastructure.Configuration;
+using reactproject.Repositories;
 using System.ComponentModel.DataAnnotations;
 
 namespace reactproject.Controllers
@@ -12,41 +13,62 @@ namespace reactproject.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
-        private RoleManager<ApplicationRole> _roleManager;
+        private readonly UserRepository _userRepository;
+        private readonly RoleRepository _roleRepository;
 
-        public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager) 
+        public UserController(UserRepository userRepository, RoleRepository roleRepository) 
         {
-            this._userManager = userManager;
-            this._roleManager = roleManager;
+            _userRepository= userRepository;
+            _roleRepository = roleRepository;
+        }
+
+        [HttpGet]
+        [Route("/api/user")]
+        public async Task<IActionResult> Get()
+        {
+            if (ModelState.IsValid)
+            {
+                if (await _userRepository.GetAllAsync() == null)
+                    return NoContent();
+            }
+            var documents = await _userRepository.GetAllAsync();
+
+            return Ok(documents);
+        }
+
+        [HttpGet]
+        [Route("/api/user/{email}")]
+        public async Task<IActionResult> Get(string email)
+        {
+            if (ModelState.IsValid)
+            {
+                if (await _userRepository.GetByEmailAsync(email) == null)
+                    return NoContent();
+            }
+            var documents = await _userRepository.GetByEmailAsync(email);
+
+            return Ok(documents);
         }
 
         [HttpPost]
         [Route("/api/user")]
-        public async Task<IActionResult> Create([FromBody]AddUserRequest user, [FromQuery]AddRoleRequest role)
+        public async Task<IActionResult> Create([FromBody]AddUserRequest user)
         {
             if (ModelState.IsValid)
             {
-                if (_roleManager.Roles.FirstOrDefault(x => x.Name == role.RoleName) == null)
+                if (await _roleRepository.GetAllAsync() == null)
                     return BadRequest("Invalid Role");
-                
-                ApplicationUser appUser = new ApplicationUser
-                {
-                    UserName = user.Name,
-                    Email = user.Email
-                };
 
+                if (await _userRepository.GetByEmailAsync(user.Email) != null)
+                    return BadRequest("Email already in use");
 
-                IdentityResult result = await _userManager.CreateAsync(appUser, user.PasswordHash);
+                var result = await _userRepository.CreateAsync(user);
                 if (result.Errors.Any())
                 {
                     foreach (IdentityError error in result.Errors)
                         return BadRequest($"{error.Description}");
                 }
-
-                await _userManager.AddToRoleAsync(appUser, role.RoleName);
             }
-
             return Ok($"Succeeded - {user}");
         }
 
@@ -56,7 +78,7 @@ namespace reactproject.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole() { Name = userRole.RoleName });
+                var result = await _roleRepository.CreateAsync(userRole);
                 if (result.Errors.Any())
                 {
                     foreach (IdentityError error in result.Errors)

@@ -2,6 +2,7 @@
 using reactproject.AggregatesModel.CostumerInfo;
 using reactproject.AggregatesModel.Order;
 using reactproject.AggregatesModel.Product;
+using reactproject.Infrastructure.Configuration;
 using reactproject.Repositories;
 
 
@@ -21,7 +22,10 @@ namespace reactproject.Infrastructure.Modules
                 .InstancePerLifetimeScope();
             builder.RegisterType<OrderRepository>()
                 .InstancePerLifetimeScope();
-
+            builder.RegisterType<UserRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<RoleRepository>()
+                .InstancePerLifetimeScope();
         }
     }
 }

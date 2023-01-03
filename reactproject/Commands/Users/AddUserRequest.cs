@@ -4,15 +4,17 @@ namespace reactproject.Commands.Users
 {
     public class AddUserRequest
     {
-        public AddUserRequest(string email, string passwordHash, string name)
+        public AddUserRequest(string email, string passwordHash, string userName, string? role)
         {
             Email = email;
             PasswordHash = passwordHash;
-            Name = name;
+            UserName = userName;
+            Role = role;
         }
 
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public string Name { get; set; }
+        public string UserName { get; set; }
+        public string? Role { get; set; }
     }
 }

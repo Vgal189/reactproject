@@ -71,6 +71,14 @@ namespace reactproject
                 policy.RequireRole("Admin", "Collaborator"));
             options.AddPolicy("DeletePolicy", policy =>
                 policy.RequireRole("Admin", "Collaborator"));
+            options.AddPolicy("Administration", policy =>
+                policy.RequireRole("Admin"));
+            options.AddPolicy("Management", policy =>
+                policy.RequireRole("Admin", "Manager"));
+            options.AddPolicy("Development", policy =>
+                policy.RequireRole("Admin", "Collaborator"));
+            options.AddPolicy("Organization", policy =>
+                policy.RequireRole("Admin", "Manager", "Collaborator"));
         }
     }
 }
