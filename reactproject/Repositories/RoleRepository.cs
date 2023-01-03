@@ -24,7 +24,6 @@ namespace reactproject.Repositories
             var filter = Builders<ApplicationRole>.Filter.Empty;
             return await collection.Find(filter).ToListAsync();
         }
-
         public async Task<IdentityResult> CreateAsync(AddRoleRequest role)
         {
             return await _roleManager.CreateAsync(new ApplicationRole() { Name = role.RoleName });

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using reactproject.Commands.Users;
 using reactproject.Infrastructure.Configuration;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,14 +21,14 @@ namespace reactproject.Controllers
 
         [HttpPost]
         [Route("/api/login")]
-        public async Task<IActionResult> Login([Required][EmailAddress] string email, [Required] string password)
+        public async Task<IActionResult> Login([FromBody] LoginRequest login)
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser appUser = await _userManager.FindByEmailAsync(email);
+                ApplicationUser appUser = await _userManager.FindByEmailAsync(login.Email);
                 if (appUser != null)
                 {
-                    Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser, password, false, false);
+                    Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser, login.Password, false, false);
                     if (result.Succeeded)
                     {
                         return Ok(result);
@@ -38,7 +39,7 @@ namespace reactproject.Controllers
                     }
                 }
             }
-            return Ok(email);
+            return Ok();
         }
 
         [HttpOptions]

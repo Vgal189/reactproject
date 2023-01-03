@@ -38,6 +38,7 @@ namespace reactproject.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "ReadPolicy")]
         [Route("/api/product/{id}")]
         public async Task<IActionResult> GetById([FromRoute] string id)
         {
@@ -47,6 +48,7 @@ namespace reactproject.Controllers
         }
 
         [HttpPut]
+        [Authorize(Policy = "UpdatePolicy")]
         [Route("/api/product/{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] UpdateProductRequest request)
         {
@@ -56,6 +58,7 @@ namespace reactproject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "CreatePolicy")]
         [Route("/api/product")]
         public async Task<IActionResult> Create([FromBody] AddProductRequest request)
         {
@@ -70,6 +73,7 @@ namespace reactproject.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Policy = "DeletePolicy")]
         [Route("/api/product/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
