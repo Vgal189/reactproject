@@ -1,8 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using reactproject.AggregatesModel.CostumerInfo;
-using reactproject.AggregatesModel.Orders;
-using reactproject.Models;
 
 namespace reactproject.ViewModels
 {

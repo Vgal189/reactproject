@@ -1,4 +1,4 @@
-﻿using reactproject.AggregatesModel.Product;
+﻿using reactproject.Domain.AggregatesModel.Products;
 
 namespace reactproject.ViewModels
 {

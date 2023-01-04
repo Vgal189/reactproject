@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using reactproject.AggregatesModel.Order;
 using reactproject.Commands.Orders;
+using reactproject.Domain.AggregatesModel.Orders;
 using reactproject.Repositories;
 
 namespace reactproject.Handler.Orders

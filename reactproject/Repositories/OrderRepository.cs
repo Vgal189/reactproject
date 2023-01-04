@@ -1,8 +1,8 @@
 ﻿using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using reactproject.AggregatesModel.CostumerInfo;
-using reactproject.AggregatesModel.Order;
-using reactproject.AggregatesModel.Product;
+using reactproject.Domain.AggregatesModel.Customer;
+using reactproject.Domain.AggregatesModel.Orders;
+using reactproject.Domain.AggregatesModel.Products;
 using reactproject.ViewModels;
 
 

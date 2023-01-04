@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.AggregatesModel.CostumerInfo;
 using reactproject.Commands.Customer;
+using reactproject.Domain.AggregatesModel.Customer;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers

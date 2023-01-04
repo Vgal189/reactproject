@@ -1,8 +1,6 @@
-﻿using reactproject.AggregatesModel.CostumerInfo;
-using reactproject.AggregatesModel.Orders;
-using reactproject.Models;
+﻿using reactproject.Domain.Core;
 
-namespace reactproject.AggregatesModel.Order
+namespace reactproject.Domain.AggregatesModel.Orders
 {
     public class Order : Entity
     {

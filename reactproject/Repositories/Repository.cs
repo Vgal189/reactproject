@@ -1,7 +1,5 @@
 ﻿using MongoDB.Driver;
-using reactproject.Models;
-using SharpCompress.Common;
-
+using reactproject.Domain.Core;
 
 namespace reactproject.Repositories
 {

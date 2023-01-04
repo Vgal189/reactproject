@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using reactproject.AggregatesModel.Product;
 using reactproject.Commands.Products;
+using reactproject.Domain.AggregatesModel.Products;
 using reactproject.Repositories;
 
 namespace reactproject.Handler.Products

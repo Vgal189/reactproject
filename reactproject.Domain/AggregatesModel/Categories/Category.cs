@@ -1,6 +1,6 @@
-﻿using reactproject.Models;
+﻿using reactproject.Domain.Core;
 
-namespace reactproject.AggregatesModel.Categories
+namespace reactproject.Domain.AggregatesModel.Categories
 {
     public class Category : Entity
     {

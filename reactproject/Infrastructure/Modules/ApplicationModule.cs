@@ -1,8 +1,7 @@
 ﻿using Autofac;
-using reactproject.AggregatesModel.CostumerInfo;
-using reactproject.AggregatesModel.Order;
-using reactproject.AggregatesModel.Product;
-using reactproject.Infrastructure.Configuration;
+using reactproject.Domain.AggregatesModel.Customer;
+using reactproject.Domain.AggregatesModel.Orders;
+using reactproject.Domain.AggregatesModel.Products;
 using reactproject.Repositories;
 
 

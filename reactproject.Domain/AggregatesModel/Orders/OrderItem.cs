@@ -1,6 +1,4 @@
-﻿using reactproject.AggregatesModel.Product;
-
-namespace reactproject.AggregatesModel.Orders
+﻿namespace reactproject.Domain.AggregatesModel.Orders
 {
     public class OrderItem
     {

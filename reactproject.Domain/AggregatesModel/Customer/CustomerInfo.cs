@@ -1,7 +1,7 @@
-﻿using reactproject.AggregatesModel.Customer;
-using reactproject.Models;
+﻿using reactproject.Domain.Core;
 
-namespace reactproject.AggregatesModel.CostumerInfo
+
+namespace reactproject.Domain.AggregatesModel.Customer
 {
     public class CustomerInfo : Entity
     {

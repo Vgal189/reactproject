@@ -1,9 +1,6 @@
 ﻿using MediatR;
-using reactproject.AggregatesModel.CostumerInfo;
-using reactproject.AggregatesModel.Order;
-using reactproject.AggregatesModel.Orders;
-using reactproject.AggregatesModel.Product;
 using reactproject.Commands.Orders;
+using reactproject.Domain.AggregatesModel.Orders;
 using reactproject.Repositories;
 
 namespace reactproject.Handler.Orders

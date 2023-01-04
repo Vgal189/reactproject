@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace reactproject.Models
+namespace reactproject.Domain.Core
 {
     public interface IEntity
     {

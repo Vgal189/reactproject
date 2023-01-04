@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using reactproject.AggregatesModel.Customer;
+using reactproject.Domain.AggregatesModel.Customer;
 
 namespace reactproject.Commands.Customer
 {

@@ -1,4 +1,4 @@
-﻿namespace reactproject.AggregatesModel.Customer
+﻿namespace reactproject.Domain.AggregatesModel.Customer
 {
     public class Address
     {

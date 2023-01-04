@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.AggregatesModel.Product;
 using reactproject.Commands.Products;
+using reactproject.Domain.AggregatesModel.Products;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers

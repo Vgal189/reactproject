@@ -1,7 +1,5 @@
 ﻿using MediatR;
-
-using reactproject.AggregatesModel.Orders;
-
+using reactproject.Domain.AggregatesModel.Orders;
 
 namespace reactproject.Commands.Orders
 {

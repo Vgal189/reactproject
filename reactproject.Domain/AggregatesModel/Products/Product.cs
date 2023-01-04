@@ -1,6 +1,6 @@
-﻿using reactproject.Models;
+﻿using reactproject.Domain.Core;
 
-namespace reactproject.AggregatesModel.Product
+namespace reactproject.Domain.AggregatesModel.Products
 {
     public class Product : Entity
     {
