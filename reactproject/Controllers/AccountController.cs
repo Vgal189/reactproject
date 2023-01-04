@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using reactproject.Commands.Users;
 using reactproject.Infrastructure.Configuration;
-using System.ComponentModel.DataAnnotations;
 
 namespace reactproject.Controllers
 {
