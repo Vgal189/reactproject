@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using MediatR;
-using reactproject.Commands.Customer;
-using reactproject.Commands.Orders;
-using reactproject.Commands.Products;
-using reactproject.Handler.Customer;
-using reactproject.Handler.Orders;
-using reactproject.Handler.Products;
+using reactproject.Application.Commands.Customer;
+using reactproject.Application.Commands.Orders;
+using reactproject.Application.Commands.Products;
+using reactproject.Application.Handler.Customer;
+using reactproject.Application.Handler.Orders;
+using reactproject.Application.Handler.Products;
 using System.Reflection;
 
 namespace reactproject.Infrastructure.Modules

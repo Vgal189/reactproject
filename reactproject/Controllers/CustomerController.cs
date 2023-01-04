@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.Commands.Customer;
+using reactproject.Application.Commands.Customer;
 using reactproject.Domain.AggregatesModel.Customer;
 using reactproject.Repositories;
 

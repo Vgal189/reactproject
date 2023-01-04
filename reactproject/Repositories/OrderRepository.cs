@@ -1,9 +1,9 @@
 ﻿using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using reactproject.Application.ViewModels;
 using reactproject.Domain.AggregatesModel.Customer;
 using reactproject.Domain.AggregatesModel.Orders;
 using reactproject.Domain.AggregatesModel.Products;
-using reactproject.ViewModels;
 
 
 namespace reactproject.Repositories

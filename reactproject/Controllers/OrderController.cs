@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using reactproject.Commands.Orders;
+using reactproject.Application.Commands.Orders;
 using reactproject.Repositories;
 
 namespace reactproject.Controllers

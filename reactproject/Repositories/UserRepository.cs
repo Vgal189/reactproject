@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MongoDB.Driver;
-using reactproject.Commands.Users;
+using reactproject.Application.Commands.Users;
+using reactproject.Application.ViewModels;
 using reactproject.Infrastructure.Configuration;
-using reactproject.ViewModels;
 using System.Data;
 
 namespace reactproject.Repositories

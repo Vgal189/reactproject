@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
-using reactproject.Commands.Users;
+using reactproject.Application.Commands.Users;
 using reactproject.Repositories;
 using System.ComponentModel.DataAnnotations;
 
