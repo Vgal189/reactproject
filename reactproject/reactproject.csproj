@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\reactproject.Domain\reactproject.Domain.csproj" />
+    <ProjectReference Include="..\reactproject.Identity\reactproject.Identity.csproj" />
   </ItemGroup>
 
 </Project>

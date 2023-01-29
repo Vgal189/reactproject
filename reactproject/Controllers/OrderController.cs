@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using reactproject.Application.Commands.Orders;
 using reactproject.Repositories;
@@ -23,6 +24,7 @@ namespace reactproject.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         [Route("/api/order")]
         public async Task<IActionResult> GetOrders()
         {

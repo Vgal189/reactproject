@@ -1,12 +1,16 @@
-﻿using AspNetCore.Identity.MongoDbCore.Models;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using reactproject.Domain.Core;
+using reactproject.Identity.Services;
 using reactproject.Infrastructure.Configuration;
 using reactproject.Infrastructure.Modules;
+using System.Text;
 
 namespace reactproject
 {
@@ -18,6 +22,7 @@ namespace reactproject
         }
         public IConfiguration Configuration { get; }
         readonly DbConfiguration configurationDb = new DbConfiguration();
+        readonly TokenService tokenService = new TokenService();
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -29,8 +34,26 @@ namespace reactproject
             services.AddSwaggerGen();
             services.AddEndpointsApiExplorer();
             services.AddSingleton(_ => configurationDb.GetMongoDbConnectionString());
-            services.AddAuthentication();
+            var key = Encoding.ASCII.GetBytes(tokenService.GetSecret());
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
             services.AddAuthorization(ConfigureAuthorizationPolicies);
+            services.AddTransient<TokenService>();
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddMongoDbStores<ApplicationUser, ApplicationRole, ObjectId>
                 (configurationDb.GetMongoDbConnectionString(), "simple_db");
@@ -48,8 +71,8 @@ namespace reactproject
         {
             app.UseCors(builder =>
                 builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             app.UseSwagger()
                 .UseSwaggerUI();
             app.UseHttpsRedirection();

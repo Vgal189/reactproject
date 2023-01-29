@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using reactproject.Application.Commands.Users;
+using reactproject.Domain.Core;
+using reactproject.Identity.Services;
 using reactproject.Infrastructure.Configuration;
 
 namespace reactproject.Controllers
@@ -11,11 +14,13 @@ namespace reactproject.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly TokenService _tokenService = new TokenService();
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, TokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         [HttpPost]
@@ -30,7 +35,8 @@ namespace reactproject.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser, login.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return Ok(result);
+                        var token = _tokenService.GenerateToken(appUser);
+                        return Ok(token.ToJson());
                     }
                     else
                     {

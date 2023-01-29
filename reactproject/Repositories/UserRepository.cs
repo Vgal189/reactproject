@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MongoDB.Driver;
 using reactproject.Application.Commands.Users;
-using reactproject.Application.ViewModels;
-using reactproject.Infrastructure.Configuration;
-using System.Data;
+using reactproject.Domain.Core;
 
 namespace reactproject.Repositories
 {
@@ -27,13 +25,11 @@ namespace reactproject.Repositories
             var filter = Builders<ApplicationUser>.Filter.Empty;
             return await collection.Find(filter).ToListAsync();
         }
-        public async Task<UserViewModel> GetByEmailAsync(string email)
+        public async Task<ApplicationUser> GetByEmailAsync(string email)
         {
             var collection = _database.GetCollection<ApplicationUser>(COLLECTION_NAME);
             var user = await collection.Find(x => x.Email == email).FirstOrDefaultAsync();
-            var userData = new UserViewModel(user.Id, user.UserName, user.Email, user.PhoneNumber, user.PhoneNumberConfirmed, user.EmailConfirmed);
-
-            return userData;
+            return user;
         }
         public async Task<IdentityResult> CreateAsync(AddUserRequest user)
         {
@@ -47,7 +43,5 @@ namespace reactproject.Repositories
 
             return createdUser;
         }
-
-
     }
 }

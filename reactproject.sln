@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "reactproject", "reactprojec
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactproject-front", "reactproject-front\reactproject-front.esproj", "{D07AFBFD-7DD1-42D3-A68E-6928509FE4DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reactproject.Identity", "reactproject.Identity\reactproject.Identity.csproj", "{6303D792-6D90-478B-86FA-4BB3F813D06B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "reactproject.Identity", "reactproject.Identity\reactproject.Identity.csproj", "{6303D792-6D90-478B-86FA-4BB3F813D06B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reactproject.Domain", "reactproject.Domain\reactproject.Domain.csproj", "{635DF4FA-097F-4BF1-B8E3-CDBECDD25FAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "reactproject.Domain", "reactproject.Domain\reactproject.Domain.csproj", "{635DF4FA-097F-4BF1-B8E3-CDBECDD25FAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

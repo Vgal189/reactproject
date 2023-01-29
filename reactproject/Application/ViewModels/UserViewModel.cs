@@ -5,15 +5,6 @@ namespace reactproject.Application.ViewModels
 {
     public class UserViewModel
     {
-        public UserViewModel(ObjectId id, string name, string email, string? phoneNumber, bool phoneNumberConfirmed, bool emailConfirmed)
-        {
-            Id = id;
-            Name = name;
-            Email = email;
-            PhoneNumber = phoneNumber;
-            PhoneNumberConfirmed = phoneNumberConfirmed;
-            EmailConfirmed = emailConfirmed;
-        }
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

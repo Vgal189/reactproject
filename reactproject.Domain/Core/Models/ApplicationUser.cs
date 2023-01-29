@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDbGenericRepository.Attributes;
 
-namespace reactproject.Infrastructure.Configuration
+namespace reactproject.Domain.Core
 {
     [CollectionName("Users")]
     public class ApplicationUser : MongoIdentityUser<ObjectId>

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 namespace reactproject.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "Admin, Manager")]
+    //[Authorize(Roles = "Admin, Manager")]
     [Route("[controller]")]
     public class UserController : Controller
     {
